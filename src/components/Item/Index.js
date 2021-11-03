@@ -1,6 +1,6 @@
 import './index.css';
 import {connect} from "react-redux";
-import {SET_SELECT_ITEM} from "../../store/action";
+import {DELETE_ITEM, SET_SELECT_ITEM} from "../../store/action";
 
 function Index(props){
     return (
@@ -20,6 +20,7 @@ function Index(props){
             <button
                 className="btn btn-danger"
                 style={{display:props.showDeleteButton?'block':'none'}}
+                onClick={()=>props.deleteItem(props.index)}
             >删除</button>
         </li>
     )
@@ -27,7 +28,8 @@ function Index(props){
 
 const stateToProps = (state) => {
     return {
-        showDeleteButton:0
+        showDeleteButton:1,
+        ...state
     }
 }
 
@@ -35,11 +37,16 @@ const dispatchToProps = dispatch=>{
     return {
         setSelect(index){
             console.log(index)
-            dispatch({type:SET_SELECT_ITEM,payload:{index:index}})
+            dispatch({type:SET_SELECT_ITEM,payload:{index}})
         },
         selectChange(){},
         mouseOver(){},
-        mouseOut(){}
+        mouseOut(){},
+        deleteItem(index){
+            if (window.confirm("确定要删除吗?")){
+                dispatch({type:DELETE_ITEM,payload:{index}})
+            }
+        }
     }
 }
 
