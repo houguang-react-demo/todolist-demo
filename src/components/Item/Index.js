@@ -1,12 +1,16 @@
 import './index.css';
 import {connect} from "react-redux";
 import {DELETE_ITEM, SET_SELECT_ITEM} from "../../store/action";
+import {useState} from "react";
 
 function Index(props){
+
+    const [showDeleteButton, setShowDeleteButton] = useState(false);
+
     return (
         <li
-            onMouseOver={props.mouseOver}
-            onMouseOut={props.mouseOut}
+            onMouseEnter={()=>setShowDeleteButton(true)}
+            onMouseLeave={()=>setShowDeleteButton(false)}
         >
             <label>
                 <input
@@ -19,7 +23,7 @@ function Index(props){
             </label>
             <button
                 className="btn btn-danger"
-                style={{display:props.showDeleteButton?'block':'none'}}
+                style={{display:showDeleteButton?'block':'none'}}
                 onClick={()=>props.deleteItem(props.index)}
             >删除</button>
         </li>
