@@ -39,7 +39,9 @@ const dispatchToProps = dispatch=>{
             dispatch({type:SET_ALL_SELECT})
         },
         deleteSelected(){
-            dispatch({type:DELETE_SELECTED_ITEM})
+            if (window.confirm("确定要删除吗")){
+                dispatch({type:DELETE_SELECTED_ITEM})
+            }
         }
     }
 }
