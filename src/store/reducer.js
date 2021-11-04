@@ -16,7 +16,7 @@ const reducer = (state = defaultData, action) => {
             newState.text = payload.value
             break;
         case ADD_ITEM:
-            newState.todos.unshift({select: false,text:newState.text})
+            newState.todos.unshift({select: false,text:payload.text})
             newState.text = ""
             break;
         case DELETE_ITEM:
